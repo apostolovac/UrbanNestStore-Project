@@ -16,7 +16,7 @@ const Auth = (): React.ReactNode => {
         <h1 className="text-4xl font-medium leading-10 mb-4">
           {isSignUp ? "SignUp" : "SignIn"}
         </h1>
-          <h2 className="font-normal text-base text-color-gray mb-px pb-3.5"> {isSignUp ? "Already have an account?" : "Need an account?"}
+          <h2 className="font-normal text-base text-color-gray mb-px pb-3.5"> {isSignUp ? "Already have an account?" : "Don’t have an account yet?"}
           <button
             className="text-color-blue hover:underline "
             onClick={() => setIsSignUp(!isSignUp)}
