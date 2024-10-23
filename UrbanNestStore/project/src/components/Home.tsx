@@ -1,22 +1,24 @@
 import React from "react";
 import {useAuthStore} from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./NavigationBar";
 
 
 const Home: React.FC = () => {
   const user = useAuthStore((state) => state.user);
-  const logout = useAuthStore((state)=> state.logout)
+  const Signout = useAuthStore((state)=> state.Signout)
 
   const navigate = useNavigate();
   return (
     <>
+    <Navbar/>
       <h1>Home</h1>
       {user ? (
         <div>
           <p>Welcome, {user.email}</p>
           <button
             onClick={() => {
-              logout();
+              Signout();
               navigate("/"); 
             }}
             className="font-extrabold"

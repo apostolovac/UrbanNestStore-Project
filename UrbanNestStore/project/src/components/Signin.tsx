@@ -11,7 +11,7 @@ const Signin = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [checked, setChecked] = useState<boolean>(false);
 
-  const login = useAuthStore((state) => state.login);
+  const Signin = useAuthStore((state) => state.Signin);
   const navigate = useNavigate();
 
   const handleChange = () => {
@@ -22,7 +22,7 @@ const Signin = () => {
     event.preventDefault();
     setLoading(true);
     setErrorMessage("");
-    login(email, password);
+    Signin(email, password);
 
    setTimeout(() => {
       if (useAuthStore.getState().isLoggedIn) {

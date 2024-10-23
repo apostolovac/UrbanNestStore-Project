@@ -1,24 +1,31 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-// Define the structure of the AuthState interface
+interface User {
+  userName: string;
+  email: string;
+  password: string;
+}
+
 interface AuthState {
-  user: { userName: string; email: string; password: string} | null;
+  user: User | null;
+  users: User[]; // Array to store registered users
   isLoggedIn: boolean;
   loading: boolean;
   error: string | null;
 
   // Actions for authentication
   register: (userName: string, email: string, password: string) => void;
-  login: (email: string, password: string) => void;
-  logout: () => void;
+  Signin: (email: string, password: string) => void;
+  Signout: () => void;
 }
 
 // Create the Zustand store for authentication
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
+      users: [],
       isLoggedIn: false,
       loading: false,
       error: null,
@@ -27,34 +34,40 @@ export const useAuthStore = create<AuthState>()(
       register: (userName, email, password) => {
         set({ loading: true });
         setTimeout(() => {
-          set({
+          // Save the user data in the store
+          set((state) => ({
+            users: [...state.users, { userName, email, password }], 
             user: { userName, email, password },
             isLoggedIn: true,
             loading: false,
             error: null,
-          });
+          }));
         }, 1000);
       },
 
       // Login user
-      login: (email, password) => {
+      Signin: (email, password) => {
         set({ loading: true });
         setTimeout(() => {
-          if (email === 'test@example.com' && password === '1234') {
+          // Check if the email and password match any registered user
+          const user = get().users.find(
+            (user) => user.email === email && user.password === password
+          );
+          if (user) {
             set({
-              user: { userName: 'TestUser', email, password },
+              user,
               isLoggedIn: true,
               loading: false,
               error: null,
             });
           } else {
-            set({ error: 'Invalid credentials', loading: false });
+            set({ error: "Invalid credentials", loading: false });
           }
         }, 1000);
       },
 
       // Logout user
-      logout: () => {
+      Signout: () => {
         set({ user: null, isLoggedIn: false });
         localStorage.removeItem("auth-storage");
       },
