@@ -1,14 +1,8 @@
 import { useState, FormEvent } from "react";
-import { signin } from "../helpers/auth";
 import { useNavigate } from "react-router-dom";
-import useUserStore from "../store/useUserStore";
+import {useAuthStore} from "../store/useAuthStore";
 import view from "../assets/view.png"
 
-
-interface SigninResponse {
-  token: string;
-  user: { id: string; email: string; password:string};
-}
 
 const Signin = () => {
   const [email, setEmail] = useState<string>("");
@@ -17,7 +11,7 @@ const Signin = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [checked, setChecked] = useState<boolean>(false);
 
-  const setUser = useUserStore((state) => state.setUser);
+  const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
 
   const handleChange = () => {
@@ -28,18 +22,16 @@ const Signin = () => {
     event.preventDefault();
     setLoading(true);
     setErrorMessage("");
+    login(email, password);
 
-    try {
-      const { token, user }: SigninResponse= await signin(email, password);
-      setUser(user);
-      localStorage.setItem("token", token);
-      navigate("/home");
-    } catch (error: any) { 
-      console.error(error);
-      setErrorMessage("Signin failed.!");
-    } finally {
-      setLoading(false);
-    }
+   setTimeout(() => {
+      if (useAuthStore.getState().isLoggedIn) {
+        navigate("/home");
+      } else {
+        setErrorMessage("Signin failed!");
+        setLoading(false);
+      }
+    }, 1000);
   };
 
   if (errorMessage) {

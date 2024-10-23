@@ -1,12 +1,13 @@
 import React from "react";
-import useUserStore from "../store/useUserStore";
-import { signOut } from "../helpers/auth";
+import {useAuthStore} from "../store/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
 
 const Home: React.FC = () => {
-  const user = useUserStore((state) => state.user);
-  const clearUser = useUserStore((state) => state.clearUser);
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state)=> state.logout)
 
+  const navigate = useNavigate();
   return (
     <>
       <h1>Home</h1>
@@ -15,8 +16,8 @@ const Home: React.FC = () => {
           <p>Welcome, {user.email}</p>
           <button
             onClick={() => {
-              clearUser();
-              signOut();
+              logout();
+              navigate("/"); 
             }}
             className="font-extrabold"
           >

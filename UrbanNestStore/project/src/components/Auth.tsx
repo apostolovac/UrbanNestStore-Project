@@ -2,7 +2,7 @@ import { useState } from "react";
 import Signin from "./Signin";
 import SignUp from "./Signup";
 
-const Auth = (): React.ReactNode => {
+const Auth = (): JSX.Element => {
   const [isSignUp, setIsSignUp] = useState<boolean>(true);
 
   return (

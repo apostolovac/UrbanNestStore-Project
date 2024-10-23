@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { register } from "../helpers/auth";
+import {useAuthStore} from "../store/useAuthStore";
 import view from "../assets/view.png"
 
 
@@ -11,6 +11,8 @@ const SignUp: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [checked, setChecked] = useState<boolean>(false);
+
+  const register = useAuthStore((state) => state.register);
 
   const navigate = useNavigate();
 
@@ -23,26 +25,16 @@ const SignUp: React.FC = () => {
     event.preventDefault();
     setLoading(true);
     setErrorMessage("");
-
-   
-
-    try {
-      const response = await register(userName, email, password);
-      if (response.success) {
-        navigate("/home");
-      } else {
-        throw new Error(response.message);
-      }
-    } catch (error) {
-      console.error(error);
-      setErrorMessage("Sign up failed! Please try again!");
-    } finally {
-      setLoading(false);
-    }
+    register(userName, email, password)
+    setTimeout(() => {
+      navigate("/home");
+    }, 1000);
   };
+
   if (errorMessage) {
     return <p>Failed to Signup: {errorMessage}</p>;
   }
+  
   return (
     <>
     <div>
