@@ -61,7 +61,7 @@ const ImageSlider = () => {
         </div>
       </div>
   
-      <div className="flex flex-col md:flex-row justify-between items-center md:w-[1120px] mx-auto mt-6 px-4">
+      <div className="flex flex-col md:flex-row justify-between items-center md:w-[1120px] mx-auto mt-10 px-4">
         <div className="text-center md:text-left mb-4 md:mb-0">
           <h1 className="text-3xl md:text-6xl font-medium">
             Purely Distinct <span className="text-color-blue">/</span>

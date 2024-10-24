@@ -2,7 +2,8 @@ import React from "react";
 import {useAuthStore} from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./NavigationBar";
-import ImageSlider from "./Slider"
+import ImageSlider from "./SliderSection"
+import BannerGrid from "./BannerGridSection"
 
 const Home: React.FC = () => {
   const user = useAuthStore((state) => state.user);
@@ -13,6 +14,7 @@ const Home: React.FC = () => {
     <>
     <Navbar/>
     <ImageSlider/>
+    <BannerGrid/>
       <h1>Home</h1>
       {user ? (
         <div>

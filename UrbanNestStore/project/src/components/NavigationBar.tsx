@@ -32,7 +32,7 @@ const Navbar = () => {
         {/* Center: Links */}
         <ul className="hidden md:flex space-x-10 text-sm justify-between">
           <li className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
-            <Link to="/">Home</Link>
+            <Link to="/Home">Home</Link>
           </li>
           <li className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
             <Link to="/jewellery">Jewellery</Link>
@@ -71,7 +71,7 @@ const Navbar = () => {
         <input type="text" placeholder="Search" className="border-0"/>  </label>
           <ul >
             <li> 
-              <Link to="/" className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">Home</Link>
+              <Link to="/Home" className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">Home</Link>
             </li>
             <li>
               <Link to="/jewellery" className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium" >Jewellery</Link>
