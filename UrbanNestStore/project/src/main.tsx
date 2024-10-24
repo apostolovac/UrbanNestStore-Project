@@ -6,6 +6,7 @@ import PublicRoute from "./components/PublicRoute.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import Home from "./components/Home.js"
 import "./index.css";
+import CategoryPage from './components/CategoryPage.js';
 
 const router = createBrowserRouter([
 
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <ProtectedRoute element={<Home />} />,
+  },
+  {
+    path: "/category/:category",
+    element: <ProtectedRoute element={<CategoryPage />} />, 
   },
 ]);
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {useAuthStore} from "../store/useAuthStore";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "./NavigationBar";
 import ImageSlider from "./SliderSection"
 import BannerGrid from "./BannerGridSection"
@@ -32,6 +32,7 @@ const Home: React.FC = () => {
       ) : (
         <p>You are not Signed in.</p>
       )}
+      <Outlet />
     </>
   );
 };
