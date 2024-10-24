@@ -2,7 +2,7 @@ import React from "react";
 import {useAuthStore} from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./NavigationBar";
-
+import ImageSlider from "./Slider"
 
 const Home: React.FC = () => {
   const user = useAuthStore((state) => state.user);
@@ -12,6 +12,7 @@ const Home: React.FC = () => {
   return (
     <>
     <Navbar/>
+    <ImageSlider/>
       <h1>Home</h1>
       {user ? (
         <div>
