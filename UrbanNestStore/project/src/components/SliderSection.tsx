@@ -34,14 +34,14 @@ const ImageSlider = () => {
         />
   
         <button
-          className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-white text-blue-500 w-8 h-8 md:w-10 md:h-10 rounded-full shadow-lg flex justify-center items-center hover:bg-blue-500 hover:text-white"
+          className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-white w-8 h-8 md:w-10 md:h-10 rounded-full shadow-lg flex justify-center items-center"
           onClick={prevSlide}
         >
           <img src={prev} className="w-4 h-4 md:w-6 md:h-6" />
         </button>
   
         <button
-          className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-white text-blue-500 w-8 h-8 md:w-10 md:h-10 rounded-full shadow-lg flex justify-center items-center hover:bg-blue-500 hover:text-white"
+          className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-white w-8 h-8 md:w-10 md:h-10 rounded-full shadow-lg flex justify-center items-center"
           onClick={nextSlide}
         >
           <img src={next} className="w-4 h-4 md:w-6 md:h-6" />
