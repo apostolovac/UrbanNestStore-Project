@@ -4,6 +4,8 @@ import { fetchCategory } from '../api/fetchData';
 import { Product } from '../types/Product';
 import ProductCard from './ProductCard';
 import Navbar from './NavigationBar';
+import NewsletterSection from './Subscribe';
+import Footer from './Footer';
 
 const CategoryPage: React.FC = () => {
   const { category } = useParams<{ category?: string }>();
@@ -44,6 +46,8 @@ const CategoryPage: React.FC = () => {
           ))}
         </div>
       </div>
+      <NewsletterSection/>
+      <Footer/>
     </>
   );
 };

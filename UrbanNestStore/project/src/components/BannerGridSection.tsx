@@ -12,8 +12,8 @@ const BannerGrid = () => {
             <div className="absolute top-12 left-12  text-white">
               <h2 className="text-5xl font-medium text-color-black">Jewelry</h2>
               <Link
-                to="/jewelry"
-                className="mt-2 text-color-black border-b-2 border-black text-2xl font-medium flex items-center w-40"> 
+                to="/category/jewelery"
+                className="mt-2 text-color-black border-b border-black text-2xl font-medium flex items-center w-40"> 
                 Shop Now <img src={shoparrow} className="ml-2" alt="arrow" />
               </Link>
             </div>
@@ -30,8 +30,8 @@ const BannerGrid = () => {
               <div className="absolute bottom-6 left-8 text-white">
                 <h2 className="text-4xl font-medium text-color-black">Men's Clothing</h2>
                 <Link
-                  to="/mens-clothing"
-                  className="mt-2 text-color-black border-b-2 border-black text-2xl font-medium flex items-center w-40">
+                  to="/category/men's clothing"
+                  className="mt-2 text-color-black border-b border-black text-2xl font-medium flex items-center w-40">
                   Shop Now <img src={shoparrow} className="ml-2" alt="arrow" />
                 </Link>
               </div>
@@ -40,14 +40,14 @@ const BannerGrid = () => {
             <div className="relative h-full">
               <img
                 src={womensclothing}
-                alt="Women's Clothing"
+                alt="women's clothing"
                 className="w-full h-full object-cover"
               />
               <div className="absolute bottom-6 left-8 text-white">
                 <h2 className="text-4xl font-medium text-color-black">Women's Clothing</h2>
                 <Link
-                  to="/womens-clothing"
-                  className="mt-2 text-color-black border-b-2 border-black text-2xl font-medium flex items-center w-40">
+                  to="/category/women's clothing"
+                  className="mt-2 text-color-black border-b border-black text-2xl font-medium flex items-center w-40">
                   Shop Now <img src={shoparrow} className="ml-2" alt="arrow" />
                 </Link>
               </div>

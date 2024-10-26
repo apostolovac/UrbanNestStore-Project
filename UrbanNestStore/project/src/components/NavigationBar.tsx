@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import menu from "../assets/menu.png";
 import close from "../assets/close.png";
 import search from "../assets/search.png";
@@ -9,13 +9,16 @@ import heart from "../assets/heart.png";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const location = useLocation();
 
   const toggleMenu = (): void => {
     setIsOpen(!isOpen);
   };
 
+  const isActiveLink = (path: string) => location.pathname === path;
+
   return (
-    <nav className="bg-white py-2 px-4">
+    <nav className="bg-color-white py-2 px-4">
       <div className="flex justify-evenly items-center">
         <div className="md:hidden">
           <button onClick={toggleMenu}>
@@ -25,22 +28,22 @@ const Navbar: React.FC = () => {
 
         <div className="text-color-blue text-2xl font-medium">UrbanNest</div>
         <ul className="hidden md:flex space-x-10 text-sm justify-between">
-          <li className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
+          <li className={`${isActiveLink("/Home") ? "text-color-blue" : "text-color-gray"}  cursor-pointer text-sm font-medium`}>
             <Link to="/Home">Home</Link>
           </li>
-          <li className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
-            <Link to="/category/jewelery">jewelery</Link>
+          <li className={`${isActiveLink("/category/jewelery") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
+            <Link to="/category/jewelery">Jewelery</Link>
           </li>
-          <li className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
-            <Link to="/category/men's clothing">Men's clothing</Link>
+          <li className={`${isActiveLink("/category/men's clothing") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
+            <Link to="/category/men's clothing">Men's Clothing</Link>
           </li>
-          <li className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
-            <Link to="/category/women's clothing">Women's clothing</Link>
+          <li className={`${isActiveLink("/category/women's clothing") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
+            <Link to="/category/women's clothing">Women's Clothing</Link>
           </li>
-          <li className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
+          <li className={`${isActiveLink("/category/electronics") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
             <Link to="/category/electronics">Electronics</Link>
           </li>
-          <li className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
+          <li className={`${isActiveLink("/contact-us") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
             <Link to="/contact-us">Contact Us</Link>
           </li>
         </ul>
@@ -68,32 +71,32 @@ const Navbar: React.FC = () => {
             </label>
             <ul>
               <li>
-                <Link to="/Home" className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
+                <Link to="/Home" className={`${isActiveLink("/Home") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/category/jewellery" className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
+                <Link to="/category/jewelery" className={`${isActiveLink("/category/jewelery") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
                   Jewellery
                 </Link>
               </li>
               <li>
-                <Link to="/category/mens-clothing" className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
-                  Men's clothing
+                <Link to="/category/mens-clothing" className={`${isActiveLink("/category/mens-clothing") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
+                  Men's Clothing
                 </Link>
               </li>
               <li>
-                <Link to="/category/womens-clothing" className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
-                  Women's clothing
+                <Link to="/category/womens-clothing" className={`${isActiveLink("/category/womens-clothing") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
+                  Women's Clothing
                 </Link>
               </li>
               <li>
-                <Link to="/category/electronics" className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
+                <Link to="/category/electronics" className={`${isActiveLink("/category/electronics") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
                   Electronics
                 </Link>
               </li>
               <li>
-                <Link to="/contact-us" className="text-color-gray hover:text-color-blue cursor-pointer text-sm font-medium">
+                <Link to="/contact-us" className={`${isActiveLink("/contact-us") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
                   Contact Us
                 </Link>
               </li>
