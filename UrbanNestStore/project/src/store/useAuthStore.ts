@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 interface User {
   userName: string;
@@ -7,17 +7,27 @@ interface User {
   password: string;
 }
 
+interface ContactForm {
+  name: string;
+  email: string;
+  message: string;
+}
+
 interface AuthState {
   user: User | null;
-  users: User[]; // Array to store registered users
+  users: User[];
   isLoggedIn: boolean;
   loading: boolean;
   error: string | null;
+  contactFormData: ContactForm | null;
+  subscriptionEmail: string | null;
 
   // Actions for authentication
   register: (userName: string, email: string, password: string) => void;
   Signin: (email: string, password: string) => void;
   Signout: () => void;
+  saveContactForm: (name: string, email: string, message: string) => void;
+  saveSubscriptionEmail: (email: string) => void;
 }
 
 // Create the Zustand store for authentication
@@ -29,14 +39,14 @@ export const useAuthStore = create<AuthState>()(
       isLoggedIn: false,
       loading: false,
       error: null,
+      contactFormData: null,
+      subscriptionEmail: null,
 
-      // Register user
       register: (userName, email, password) => {
         set({ loading: true });
         setTimeout(() => {
-          // Save the user data in the store
           set((state) => ({
-            users: [...state.users, { userName, email, password }], 
+            users: [...state.users, { userName, email, password }],
             user: { userName, email, password },
             isLoggedIn: true,
             loading: false,
@@ -45,11 +55,9 @@ export const useAuthStore = create<AuthState>()(
         }, 1000);
       },
 
-      // Login user
       Signin: (email, password) => {
         set({ loading: true });
         setTimeout(() => {
-          // Check if the email and password match any registered user
           const user = get().users.find(
             (user) => user.email === email && user.password === password
           );
@@ -66,14 +74,30 @@ export const useAuthStore = create<AuthState>()(
         }, 1000);
       },
 
-      // Logout user
       Signout: () => {
-        set({ user: null, isLoggedIn: false });
-        localStorage.removeItem("auth-storage");
+        set({
+          user: null,
+          users: [],
+          isLoggedIn: false,
+          contactFormData: null,
+          subscriptionEmail: null,
+          error: null,
+        });
+        localStorage.removeItem("user-storage");
+      },
+
+      saveContactForm: (name, email, message) => {
+        set({ contactFormData: { name, email, message } });
+        console.log('Contact form submitted:', { name, email, message });
+      },
+      saveSubscriptionEmail: (email) => {
+        set({ subscriptionEmail: email });
+        console.log('Subscribed email:', email);
       },
     }),
     {
-      name: "auth-storage",
+      name: "user-storage",
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

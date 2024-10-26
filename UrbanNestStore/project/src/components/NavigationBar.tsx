@@ -15,7 +15,10 @@ const Navbar: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  const isActiveLink = (path: string) => location.pathname === path;
+  const isActiveLink = (path: string) => {
+    const currentPath = location.pathname.replace(/%20/g, ' ');
+    return currentPath === path;
+  };
 
   return (
     <nav className="bg-color-white py-2 px-4">
@@ -28,7 +31,7 @@ const Navbar: React.FC = () => {
 
         <div className="text-color-blue text-2xl font-medium">UrbanNest</div>
         <ul className="hidden md:flex space-x-10 text-sm justify-between">
-          <li className={`${isActiveLink("/Home") ? "text-color-blue" : "text-color-gray"}  cursor-pointer text-sm font-medium`}>
+          <li className={`${isActiveLink("/Home") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
             <Link to="/Home">Home</Link>
           </li>
           <li className={`${isActiveLink("/category/jewelery") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
@@ -47,7 +50,7 @@ const Navbar: React.FC = () => {
             <Link to="/contact-us">Contact Us</Link>
           </li>
         </ul>
-        <div className="flex items-center space-x-2 text-lg">
+        <div className="flex items-center space-x-2 text-lg gap-4">
           <Link to="#" className="hidden lg:block">
             <img src={search} alt="Search" />
           </Link>
@@ -81,12 +84,12 @@ const Navbar: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/category/mens-clothing" className={`${isActiveLink("/category/mens-clothing") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
+                <Link to="/category/men's clothing" className={`${isActiveLink("/category/men's clothing") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
                   Men's Clothing
                 </Link>
               </li>
               <li>
-                <Link to="/category/womens-clothing" className={`${isActiveLink("/category/womens-clothing") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
+                <Link to="/category/women's clothing" className={`${isActiveLink("/category/women's clothing") ? "text-color-blue" : "text-color-gray"} cursor-pointer text-sm font-medium`}>
                   Women's Clothing
                 </Link>
               </li>

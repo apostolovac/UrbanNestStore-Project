@@ -4,8 +4,8 @@ import { fetchCategory } from '../api/fetchData';
 import { Product } from '../types/Product';
 import ProductCard from './ProductCard';
 import Navbar from './NavigationBar';
-import NewsletterSection from './Subscribe';
 import Footer from './Footer';
+import Subscribe from './Subscribe';
 
 const CategoryPage: React.FC = () => {
   const { category } = useParams<{ category?: string }>();
@@ -37,16 +37,16 @@ const CategoryPage: React.FC = () => {
     <>
       <Navbar />
       <div>
-        <h1 className="text-center text-3xl font-bold mb-8">
-          {category.charAt(0).toUpperCase() + category.slice(1)}
+        <h1 className="text-center text-6xl font-medium text-color-gray my-24">
+        {category && category[0].toUpperCase() + category.slice(1)}
         </h1>
-        <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-[1183px] mx-auto">
           {products.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </div>
-      <NewsletterSection/>
+      <Subscribe/>
       <Footer/>
     </>
   );

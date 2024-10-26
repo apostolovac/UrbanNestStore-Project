@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute.js";
 import Home from "./components/Home.js"
 import "./index.css";
 import CategoryPage from './components/CategoryPage.js';
+import ContactUs from './components/ContactUs.js';
 
 const router = createBrowserRouter([
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/category/:category",
     element: <ProtectedRoute element={<CategoryPage />} />, 
+  },
+  {
+    path: "/contact-us",
+    element: <ContactUs />,
   },
 ]);
 
