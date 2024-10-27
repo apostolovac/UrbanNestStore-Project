@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { fetchCategory } from '../api/fetchData';
 import { Product } from '../types/Product';
 import ProductCard from './ProductCard';
@@ -41,9 +41,11 @@ const CategoryPage: React.FC = () => {
         {category && category[0].toUpperCase() + category.slice(1)}
         </h1>
         <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-[1183px] mx-auto">
-          {products.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        {products.map(product => (
+          <Link to={`/product/${product.id}`} key={product.id}>
+          <ProductCard product={product} />
+        </Link>
+))}
         </div>
       </div>
       <Subscribe/>

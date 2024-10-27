@@ -8,6 +8,7 @@ import Home from "./components/Home.js"
 import "./index.css";
 import CategoryPage from './components/CategoryPage.js';
 import ContactUs from './components/ContactUs.js';
+import ProductPage from './components/ProductPage.js';
 
 const router = createBrowserRouter([
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/contact-us",
     element: <ContactUs />,
+  },
+  {
+    path: "/product/:id",
+    element: <ProtectedRoute element={<ProductPage />} />,
   },
 ]);
 

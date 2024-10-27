@@ -8,8 +8,12 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+
+
   return (
-    <div className="w-[275px] h-[500px] min-w-[260px]  shadow flex flex-col rounded mb-20">
+    <>
+     <div className="w-[275px] h-[500px] min-w-[260px] shadow flex flex-col rounded mb-20 cursor-pointer"
+  >
     
       <img
         src={product.image}
@@ -39,6 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
