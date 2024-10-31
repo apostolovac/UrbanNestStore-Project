@@ -10,6 +10,8 @@ import CategoryPage from './components/CategoryPage.tsx';
 import ContactUs from './components/ContactUs.tsx';
 import ProductPage from './components/ProductPage.tsx';
 import Cart from './components/CartPage.tsx';
+import Checkout from './components/CheckoutPage.tsx';
+import OrderComplete from './components/OrderCompletePage.tsx';
 
 const router = createBrowserRouter([
 
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
   {
     path: "/cart",
     element: <ProtectedRoute element={<Cart />} />,
+  },
+  {
+    path: "/checkout",
+    element: <ProtectedRoute element={<Checkout />} />,
+  },
+  {
+    path: "/ordercomplete",
+    element: <ProtectedRoute element={<OrderComplete />} />,
   },
 ]);
 

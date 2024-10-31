@@ -9,9 +9,11 @@ import Footer from './Footer';
 import visa from "../assets/visa.png"
 import mastercard from "../assets/mastercard.png"
 import paypal from "../assets/paypal.png"
+import { useNavigate } from 'react-router-dom';
 
 const Cart: React.FC = () => {
   const { items, removeItem, updateQuantity } = useStore();
+  const navigate = useNavigate();
 
   const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
@@ -24,6 +26,10 @@ const Cart: React.FC = () => {
     if (currentQuantity > 1) {
       updateQuantity(id, size, currentQuantity - 1);
     }
+  };
+
+  const handleCheckout = () => {
+    navigate('/checkout');
   };
 
   return (
@@ -115,7 +121,10 @@ const Cart: React.FC = () => {
             <span>${totalPrice.toFixed(2)}</span>
           </p>
 
-          <button className="mt-4 bg-color-blue text-white w-full h-[50px] flex flex-row justify-center items-center rounded-md uppercase">
+          <button
+            className="mt-4 bg-color-blue text-white w-full h-[50px] flex flex-row justify-center items-center rounded-md uppercase"
+            onClick={handleCheckout}
+          >
             <img src={checkout} className='mr-2' alt="Checkout" />
             Checkout
           </button>
