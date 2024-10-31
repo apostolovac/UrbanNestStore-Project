@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import {useAuthStore} from "../store/useAuthStore";
+import {useStore} from "../store/useStore";
 import view from "../assets/view.png"
 
 
@@ -12,7 +12,7 @@ const SignUp: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [checked, setChecked] = useState<boolean>(false);
 
-  const register = useAuthStore((state) => state.register);
+  const register = useStore((state) => state.register);
 
   const navigate = useNavigate();
 

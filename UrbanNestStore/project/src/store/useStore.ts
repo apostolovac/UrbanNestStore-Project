@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { Product } from "../types/Product";
+
 
 interface User {
   userName: string;
@@ -7,13 +9,13 @@ interface User {
   password: string;
 }
 
-interface ContactForm {
-  name: string;
-  email: string;
-  message: string;
+interface CartItem {
+  product: Product;
+  quantity: number;
+  size: number;
 }
 
-interface AuthState {
+interface State {
   user: User | null;
   users: User[];
   isLoggedIn: boolean;
@@ -22,16 +24,28 @@ interface AuthState {
   contactFormData: ContactForm | null;
   subscriptionEmail: string | null;
 
-  // Actions for authentication
+
   register: (userName: string, email: string, password: string) => void;
   Signin: (email: string, password: string) => void;
   Signout: () => void;
   saveContactForm: (name: string, email: string, message: string) => void;
   saveSubscriptionEmail: (email: string) => void;
+
+
+  items: CartItem[];
+  addItem: (product: Product, quantity: number, size: number) => void;
+  removeItem: (id: number, size: number) => void;
+  updateQuantity: (id: number, size: number, newQuantity: number) => void;
+  clearCart: () => void;
 }
 
-// Create the Zustand store for authentication
-export const useAuthStore = create<AuthState>()(
+interface ContactForm {
+  name: string;
+  email: string;
+  message: string;
+}
+
+export const useStore = create<State>()(
   persist(
     (set, get) => ({
       user: null,
@@ -75,6 +89,7 @@ export const useAuthStore = create<AuthState>()(
       },
 
       Signout: () => {
+        get().clearCart(); 
         set({
           user: null,
           users: [],
@@ -94,9 +109,50 @@ export const useAuthStore = create<AuthState>()(
         set({ subscriptionEmail: email });
         console.log('Subscribed email:', email);
       },
+
+      items: [],
+      addItem: (product, quantity, size) => {
+        set((state) => {
+          const existingItemIndex = state.items.findIndex(
+            (item) => item.product.id === product.id && item.size === size
+          );
+
+          if (existingItemIndex !== -1) {
+            const updatedItems = [...state.items];
+            updatedItems[existingItemIndex].quantity += quantity;
+            return { items: updatedItems };
+          } else {
+            return {
+              items: [...state.items, { product, quantity, size }],
+            };
+          }
+        });
+      },
+
+      removeItem: (id, size) => {
+        set((state) => ({
+          items: state.items.filter(
+            (item) => !(item.product.id === id && item.size === size)
+          ),
+        }));
+      },
+
+      updateQuantity: (id, size, newQuantity) => {
+        set((state) => ({
+          items: state.items.map((item) =>
+            item.product.id === id && item.size === size
+              ? { ...item, quantity: newQuantity }
+              : item
+          ),
+        }));
+      },
+
+      clearCart: () => {
+        set({ items: [] });
+      },
     }),
     {
-      name: "user-storage",
+      name: "user-cart-storage",
       storage: createJSONStorage(() => localStorage),
     }
   )

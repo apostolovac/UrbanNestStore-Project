@@ -15,7 +15,7 @@ export default {
       'color-red': '#FF0000',
       'color-grayish': '#F6F6F6',
       'color-lightgray' : '#7B7B7B',
-    }
+    },
   },
   },
   plugins: [],

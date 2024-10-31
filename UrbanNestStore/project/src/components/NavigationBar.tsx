@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useStore } from "../store/useStore";
 import menu from "../assets/menu.png";
 import close from "../assets/close.png";
 import search from "../assets/search.png";
@@ -10,6 +11,10 @@ import heart from "../assets/heart.png";
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const location = useLocation();
+  
+  const { items } = useStore();
+  
+  const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
 
   const toggleMenu = (): void => {
     setIsOpen(!isOpen);
@@ -57,11 +62,16 @@ const Navbar: React.FC = () => {
           <Link to="#" className="hidden lg:block">
             <img src={user} alt="User" />
           </Link>
-          <div className="relative">
-            <img src={shoppingbag} alt="Shopping bag" />
-            <span className="absolute -top-2 -right-2 bg-color-blue text-white rounded-full h-4 w-4 text-xs flex items-center justify-center">
-              3
-            </span>
+          <div className={`${isOpen ? 'hidden' : 'block'} lg:block relative`}>
+            <Link to="/cart">
+              <img src={shoppingbag} alt="Shopping bag" />
+  
+              {totalQuantity > 0 && (
+                <span className="absolute -top-2 -right-2 bg-color-blue text-white rounded-full h-4 w-4 text-xs flex items-center justify-center">
+                  {totalQuantity}
+                </span>
+              )}
+            </Link>
           </div>
         </div>
       </div>
@@ -107,11 +117,19 @@ const Navbar: React.FC = () => {
           </div>
           <div className="items-end">
             <ul>
-              <li className="border-b-2">
-                <Link to="#" className="flex flex-row justify-between space-y-8">
-                  Cart <img src={shoppingbag} alt="Shopping bag" />
-                </Link>
-              </li>
+            <li className="border-b-2">
+          <Link to="/cart" className="flex flex-row justify-between space-y-8">
+            Cart 
+            <div className="relative">
+              <img src={shoppingbag} alt="Shopping bag" />
+              {totalQuantity > 0 && (
+                <span className="absolute -top-2 -right-2 bg-color-blue text-white rounded-full h-4 w-4 text-xs flex items-center justify-center">
+                  {totalQuantity}
+                </span>
+              )}
+            </div>
+          </Link>
+        </li>
               <li>
                 <Link to="#" className="flex flex-row justify-between space-y-8">
                   Wishlist <img src={heart} alt="Wishlist" />

@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuthStore } from "../store/useAuthStore";
+import { useStore } from "../store/useStore";
 
 interface ProtectedRouteProps {
   element: ReactNode;
 }
 
 const ProtectedRoute = ({ element }: ProtectedRouteProps) => {
-  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const isLoggedIn = useStore((state) => state.isLoggedIn);
 
   return isLoggedIn ? element : <Navigate to="/" />;
 };

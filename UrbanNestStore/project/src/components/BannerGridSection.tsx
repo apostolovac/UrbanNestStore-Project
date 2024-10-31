@@ -7,7 +7,7 @@ import shoparrow from "../assets/shoparrow.png"
 const BannerGrid = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-[1120px] mx-auto mt-10">
-          <div className="relative h-[579px]">
+          <div className="relative h-[260px] lg:h-[579px]">
             <img src={jewelry} alt="Jewelry" className="w-full h-full object-cover" />
             <div className="absolute top-12 left-12  text-white">
               <h2 className="text-5xl font-medium text-color-black">Jewelry</h2>
@@ -20,7 +20,7 @@ const BannerGrid = () => {
           </div>
     
 
-          <div className="grid grid-rows-2 gap-4 h-[579px]">
+          <div className="grid grid-rows-2 gap-4 h-[520px] lg:h-[579px]">
             <div className="relative h-full">
               <img
                 src={mensclothing}

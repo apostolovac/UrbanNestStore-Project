@@ -2,7 +2,7 @@ import { useState } from "react";
 import Signin from "./Signin";
 import SignUp from "./Signup";
 
-const Auth = (): JSX.Element => {
+const Authentication = (): JSX.Element => {
   const [isSignUp, setIsSignUp] = useState<boolean>(true);
 
   return (
@@ -32,4 +32,4 @@ const Auth = (): JSX.Element => {
     </div>
   );
 };
-export default Auth;
+export default Authentication;

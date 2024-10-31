@@ -1,20 +1,21 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Auth from './components/Auth'
+import Authentication from './components/Authentication.tsx'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import PublicRoute from "./components/PublicRoute.js";
-import ProtectedRoute from "./components/ProtectedRoute.js";
-import Home from "./components/Home.js"
+import PublicRoute from "./components/PublicRoute.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import Home from "./components/Home.tsx"
 import "./index.css";
-import CategoryPage from './components/CategoryPage.js';
-import ContactUs from './components/ContactUs.js';
-import ProductPage from './components/ProductPage.js';
+import CategoryPage from './components/CategoryPage.tsx';
+import ContactUs from './components/ContactUs.tsx';
+import ProductPage from './components/ProductPage.tsx';
+import Cart from './components/CartPage.tsx';
 
 const router = createBrowserRouter([
 
   {
     path: "/",
-    element: <PublicRoute element={<Auth />} />,
+    element: <PublicRoute element={<Authentication />} />,
   },
   {
     path: "/home",
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/product/:id",
     element: <ProtectedRoute element={<ProductPage />} />,
+  },
+  {
+    path: "/cart",
+    element: <ProtectedRoute element={<Cart />} />,
   },
 ]);
 
