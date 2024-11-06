@@ -5,9 +5,9 @@ import call from "../assets/call.png";
 import mail from "../assets/mail.png";
 import { Link } from "react-router-dom";
 import shoparrow from "../assets/shoparrow.png"
-import Navbar from "./NavigationBar";
-import Footer from "./Footer";
-import ServiceSection from "./ServiceSection";
+import Navbar from "../components/NavigationBar";
+import Footer from "../components/Footer";
+import ServiceSection from "../components/ServiceSection";
 import { useStore } from "../store/useStore";
 
 const ContactUs: React.FC = () => {

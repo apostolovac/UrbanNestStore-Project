@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Product } from '../types/Product';
 import heart from "../assets/heart.png";
-import Navbar from './NavigationBar';
+import Navbar from '../components/NavigationBar';
 import minus from "../assets/minus.png";
 import plus from "../assets/plus.png";
 import cardwithplus from "../assets/cardwithplus.png";

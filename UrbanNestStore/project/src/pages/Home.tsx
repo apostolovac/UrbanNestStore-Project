@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import {useStore} from "../store/useStore";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import Navbar from "./NavigationBar";
-import ImageSlider from "./SliderSection"
-import BannerGrid from "./BannerGridSection"
-import ProductSection from "./ProductSection";
+import Navbar from "../components/NavigationBar";
+import ImageSlider from "../components/SliderSection"
+import BannerGrid from "../components/BannerGridSection"
+import ProductSection from "../components/ProductSection";
 import { Product } from "../types/Product";
 import { fetchCategory } from "../api/fetchData";
 import imagesection from "../assets/imagesection.png"
 import shoparrow from "../assets/shoparrow.png"
-import Footer from "./Footer";
-import NewsletterSection from "./Subscribe";
-import ServiceSection from "./ServiceSection";
+import Footer from "../components/Footer";
+import NewsletterSection from "../components/Subscribe";
+import ServiceSection from "../components/ServiceSection";
 
 const Home: React.FC = () => {
   const user = useStore((state) => state.user);

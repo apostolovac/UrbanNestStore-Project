@@ -152,7 +152,7 @@ export const useStore = create<State>()(
       },
     }),
     {
-      name: "user-cart-storage",
+      name: "user-storage",
       storage: createJSONStorage(() => localStorage),
     }
   )

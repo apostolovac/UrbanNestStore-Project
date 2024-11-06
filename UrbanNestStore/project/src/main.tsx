@@ -4,14 +4,14 @@ import Authentication from './components/Authentication.tsx'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import PublicRoute from "./components/PublicRoute.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
-import Home from "./components/Home.tsx"
+import Home from "./pages/Home.tsx"
 import "./index.css";
-import CategoryPage from './components/CategoryPage.tsx';
-import ContactUs from './components/ContactUs.tsx';
-import ProductPage from './components/ProductPage.tsx';
-import Cart from './components/CartPage.tsx';
-import Checkout from './components/CheckoutPage.tsx';
-import OrderComplete from './components/OrderCompletePage.tsx';
+import CategoryPage from './pages/CategoryPage.tsx';
+import ContactUs from './pages/ContactUsPage.tsx';
+import ProductPage from './pages/ProductPage.tsx';
+import Cart from './pages/CartPage.tsx';
+import Checkout from './pages/CheckoutPage.tsx';
+import OrderComplete from './pages/OrderCompletePage.tsx';
 
 const router = createBrowserRouter([
 

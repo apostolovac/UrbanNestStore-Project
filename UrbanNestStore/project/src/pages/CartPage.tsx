@@ -4,8 +4,8 @@ import trash from "../assets/trash.png";
 import minus from "../assets/minus.png";
 import plus from "../assets/plus.png";
 import checkout from "../assets/checkout.png";
-import Navbar from './NavigationBar';
-import Footer from './Footer';
+import Navbar from '../components/NavigationBar'
+import Footer from '../components/Footer';
 import visa from "../assets/visa.png"
 import mastercard from "../assets/mastercard.png"
 import paypal from "../assets/paypal.png"
@@ -68,17 +68,17 @@ const Cart: React.FC = () => {
                   ${item.product.price.toFixed(2)}
                 </span>
 
-                <div className="flex items-center">
+                <div className="flex items-center border rounded">
                   <button
                     onClick={() => handleDecreaseQuantity(item.product.id, item.size, item.quantity)}
-                    className="border-y border-l rounded-l p-2"
+                    className="p-2"
                   >
                     <img src={minus} alt="Decrease quantity" />
                   </button>
-                  <span className="border-y h-[39px] pt-2 px-2">{item.quantity}</span>
+                  <span className="h-[39px] pt-2 px-2">{item.quantity}</span>
                   <button
                     onClick={() => handleIncreaseQuantity(item.product.id, item.size, item.quantity)}
-                    className="border-y border-r rounded-r p-2"
+                    className="p-2"
                   >
                     <img src={plus} alt="Increase quantity" />
                   </button>

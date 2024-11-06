@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { fetchCategory } from '../api/fetchData';
 import { Product } from '../types/Product';
-import ProductCard from './ProductCard';
-import Navbar from './NavigationBar';
-import Footer from './Footer';
-import Subscribe from './Subscribe';
+import ProductCard from '../components/ProductCard';
+import Navbar from '../components/NavigationBar';
+import Footer from '../components/Footer';
+import Subscribe from '../components/Subscribe';
 
 const CategoryPage: React.FC = () => {
   const { category } = useParams<{ category?: string }>();
