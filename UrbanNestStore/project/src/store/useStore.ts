@@ -28,6 +28,7 @@ interface State {
   register: (userName: string, email: string, password: string) => void;
   Signin: (email: string, password: string) => void;
   Signout: () => void;
+  resetPassword: (newPassword: string) => void;
   saveContactForm: (name: string, email: string, message: string) => void;
   saveSubscriptionEmail: (email: string) => void;
 
@@ -108,6 +109,20 @@ export const useStore = create<State>()(
       saveSubscriptionEmail: (email) => {
         set({ subscriptionEmail: email });
         console.log('Subscribed email:', email);
+      },
+      resetPassword: (newPassword) => {
+        const user = get().user;
+        if (user) {
+          set((state) => ({
+            users: state.users.map((u) =>
+              u.email === user.email ? { ...u, password: newPassword } : u
+            ),
+            user: { ...user, password: newPassword },
+          }));
+          console.log("Password updated successfully");
+        } else {
+          console.log("No user is signed in");
+        }
       },
 
       items: [],

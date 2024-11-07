@@ -12,6 +12,7 @@ import ProductPage from './pages/ProductPage.tsx';
 import Cart from './pages/CartPage.tsx';
 import Checkout from './pages/CheckoutPage.tsx';
 import OrderComplete from './pages/OrderCompletePage.tsx';
+import Profile from './pages/ProfilePage.tsx';
 
 const router = createBrowserRouter([
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/ordercomplete",
     element: <ProtectedRoute element={<OrderComplete />} />,
+  },
+  {
+    path: "/profile",
+    element: <ProtectedRoute element={<Profile/>} />,
   },
 ]);
 

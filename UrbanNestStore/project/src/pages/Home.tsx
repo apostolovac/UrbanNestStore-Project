@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {useStore} from "../store/useStore";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet} from "react-router-dom";
 import Navbar from "../components/NavigationBar";
 import ImageSlider from "../components/SliderSection"
 import BannerGrid from "../components/BannerGridSection"
@@ -14,11 +13,6 @@ import NewsletterSection from "../components/Subscribe";
 import ServiceSection from "../components/ServiceSection";
 
 const Home: React.FC = () => {
-  const user = useStore((state) => state.user);
-  const Signout = useStore((state)=> state.Signout)
-
-  const navigate = useNavigate();
-
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -61,23 +55,6 @@ const Home: React.FC = () => {
 </section>
     <NewsletterSection/>
     <Footer/>
-      <h1>Home</h1>
-      {user ? (
-        <div>
-          <p>Welcome, {user.email}</p>
-          <button
-            onClick={() => {
-              Signout();
-              navigate("/"); 
-            }}
-            className="font-extrabold"
-          >
-            Sign Out
-          </button>
-        </div>
-      ) : (
-        <p>You are not Signed in.</p>
-      )}
       <Outlet />
     </>
   );

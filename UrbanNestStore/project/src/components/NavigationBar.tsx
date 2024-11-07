@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
           <Link to="#" className="hidden lg:block">
             <img src={search} alt="Search" />
           </Link>
-          <Link to="#" className="hidden lg:block">
+          <Link to="/profile" className="hidden lg:block">
             <img src={user} alt="User" />
           </Link>
           <div className={`${isOpen ? 'hidden' : 'block'} lg:block relative`}>
