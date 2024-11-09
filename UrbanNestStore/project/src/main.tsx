@@ -13,6 +13,7 @@ import Cart from './pages/CartPage.tsx';
 import Checkout from './pages/CheckoutPage.tsx';
 import OrderComplete from './pages/OrderCompletePage.tsx';
 import Profile from './pages/ProfilePage.tsx';
+import WishlistPage from './pages/WishListPage.tsx';
 
 const router = createBrowserRouter([
 
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <ProtectedRoute element={<Profile/>} />,
+  },
+  {
+    path: "/wishlist",
+    element: <ProtectedRoute element={<WishlistPage/>} />,
   },
 ]);
 

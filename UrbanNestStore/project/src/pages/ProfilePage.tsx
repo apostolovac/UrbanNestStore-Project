@@ -3,23 +3,22 @@ import Navbar from '../components/NavigationBar';
 import Footer from '../components/Footer';
 import avatar from "../assets/avatar.png";
 import { useStore } from '../store/useStore';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Profile: React.FC = () => {
   const { resetPassword } = useStore();
-  const Signout = useStore((state)=> state.Signout)
+  const Signout = useStore((state) => state.Signout);
 
   const navigate = useNavigate();
 
-  
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [displayName, setDisplayName] = useState('');
-  const [email, setEmail] = useState('');
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [displayName, setDisplayName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [oldPassword, setOldPassword] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const handlePasswordChange = () => {
     if (newPassword === confirmPassword) {
@@ -32,7 +31,6 @@ const Profile: React.FC = () => {
       setOldPassword('');
       setNewPassword('');
       setConfirmPassword('');
-
     } else {
       setError("Passwords do not match");
     }
@@ -54,15 +52,19 @@ const Profile: React.FC = () => {
               <ul className="flex flex-col justify-between gap-3">
                 <li className="text-base font-semibold border-b border-color-black py-2">Account</li>
                 <li className="text-base font-semibold text-color-gray py-2">Address</li>
-                <li className="text-base font-semibold text-color-gray py-2">Wishlist</li>
-                <li className="text-base font-semibold text-color-gray py-2"><button
-            onClick={() => {
-              Signout();
-              navigate("/"); 
-            }}
-          >
-            Log Out
-          </button></li>
+                <li className="text-base font-semibold text-color-gray py-2">
+                  <Link to={'/wishlist'}>Wishlist</Link>
+                </li>
+                <li className="text-base font-semibold text-color-gray py-2">
+                  <button
+                    onClick={() => {
+                      Signout();
+                      navigate("/"); 
+                    }}
+                  >
+                    Log Out
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
@@ -99,7 +101,9 @@ const Profile: React.FC = () => {
                   placeholder="Display name"
                   className="w-full border border-color-lightgray p-2 mt-2 rounded"
                 />
-                <span className="text-xs font-normal italic text-color-gray">This will be how your name will be displayed in the account section and in reviews</span>
+                <span className="text-xs font-normal italic text-color-gray">
+                  This will be how your name will be displayed in the account section and in reviews
+                </span>
               </div>
               <div>
                 <label className="block text-xs font-bold text-color-gray uppercase">Email</label>

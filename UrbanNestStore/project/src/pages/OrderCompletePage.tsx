@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressBar from '../components/Progressbar';
+import ProgressBar from '../components/ProgressBar';
 import Navbar from '../components/NavigationBar';
 import Footer from '../components/Footer';
 import thankyou from "../assets/thankyou.png";

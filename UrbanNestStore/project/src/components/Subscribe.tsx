@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useStore } from '../store/useStore';
 
 const Subscribe: React.FC = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState<string>();
   const saveSubscriptionEmail = useStore((state) => state.saveSubscriptionEmail);
 
   const handleSubscribe = () => {

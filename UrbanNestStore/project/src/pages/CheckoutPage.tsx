@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useStore } from '../store/useStore';
 import { useNavigate } from 'react-router-dom';
-import ProgressBar from '../components/Progressbar';
+import ProgressBar from '../components/ProgressBar';
 import Navbar from '../components/NavigationBar';
 import Footer from '../components/Footer';
 import creditcard from "../assets/creditcard.png";

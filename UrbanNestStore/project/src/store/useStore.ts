@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { Product } from "../types/Product";
 
-
 interface User {
   userName: string;
   email: string;
@@ -24,20 +23,25 @@ interface State {
   contactFormData: ContactForm | null;
   subscriptionEmail: string | null;
 
+  // Cart related state and methods
+  items: CartItem[];
+  addItem: (product: Product, quantity: number, size: number) => void;
+  removeItem: (id: number, size: number) => void;
+  updateQuantity: (id: number, size: number, newQuantity: number) => void;
+  clearCart: () => void;
 
+  // Wishlist related state and methods
+  wishlist: Product[]; // Add wishlist to the state
+  addToWishlist: (product: Product) => void;
+  removeFromWishlist: (productId: number) => void;
+
+  // Methods for user authentication and contact form handling
   register: (userName: string, email: string, password: string) => void;
   Signin: (email: string, password: string) => void;
   Signout: () => void;
   resetPassword: (newPassword: string) => void;
   saveContactForm: (name: string, email: string, message: string) => void;
   saveSubscriptionEmail: (email: string) => void;
-
-
-  items: CartItem[];
-  addItem: (product: Product, quantity: number, size: number) => void;
-  removeItem: (id: number, size: number) => void;
-  updateQuantity: (id: number, size: number, newQuantity: number) => void;
-  clearCart: () => void;
 }
 
 interface ContactForm {
@@ -57,6 +61,65 @@ export const useStore = create<State>()(
       contactFormData: null,
       subscriptionEmail: null,
 
+      // Cart related methods
+      items: [],
+      addItem: (product, quantity, size) => {
+        set((state) => {
+          const existingItemIndex = state.items.findIndex(
+            (item) => item.product.id === product.id && item.size === size
+          );
+          if (existingItemIndex !== -1) {
+            const updatedItems = [...state.items];
+            updatedItems[existingItemIndex].quantity += quantity;
+            return { items: updatedItems };
+          } else {
+            return {
+              items: [...state.items, { product, quantity, size }],
+            };
+          }
+        });
+      },
+
+      removeItem: (id, size) => {
+        set((state) => ({
+          items: state.items.filter(
+            (item) => !(item.product.id === id && item.size === size)
+          ),
+        }));
+      },
+
+      updateQuantity: (id, size, newQuantity) => {
+        set((state) => ({
+          items: state.items.map((item) =>
+            item.product.id === id && item.size === size
+              ? { ...item, quantity: newQuantity }
+              : item
+          ),
+        }));
+      },
+
+      clearCart: () => {
+        set({ items: [] });
+      },
+
+      // Wishlist related methods
+      wishlist: [], // Initialize an empty wishlist
+      addToWishlist: (product) => {
+        set((state) => {
+          if (!state.wishlist.some((item) => item.id === product.id)) {
+            return { wishlist: [...state.wishlist, product] };
+          }
+          return state; // Product already in wishlist, no change
+        });
+      },
+
+      removeFromWishlist: (productId) => {
+        set((state) => ({
+          wishlist: state.wishlist.filter((product) => product.id !== productId),
+        }));
+      },
+
+      // User authentication methods
       register: (userName, email, password) => {
         set({ loading: true });
         setTimeout(() => {
@@ -90,7 +153,7 @@ export const useStore = create<State>()(
       },
 
       Signout: () => {
-        get().clearCart(); 
+        get().clearCart(); // Clear cart on sign out
         set({
           user: null,
           users: [],
@@ -98,6 +161,7 @@ export const useStore = create<State>()(
           contactFormData: null,
           subscriptionEmail: null,
           error: null,
+          wishlist: []
         });
         localStorage.removeItem("user-storage");
       },
@@ -106,10 +170,12 @@ export const useStore = create<State>()(
         set({ contactFormData: { name, email, message } });
         console.log('Contact form submitted:', { name, email, message });
       },
+
       saveSubscriptionEmail: (email) => {
         set({ subscriptionEmail: email });
         console.log('Subscribed email:', email);
       },
+
       resetPassword: (newPassword) => {
         const user = get().user;
         if (user) {
@@ -123,47 +189,6 @@ export const useStore = create<State>()(
         } else {
           console.log("No user is signed in");
         }
-      },
-
-      items: [],
-      addItem: (product, quantity, size) => {
-        set((state) => {
-          const existingItemIndex = state.items.findIndex(
-            (item) => item.product.id === product.id && item.size === size
-          );
-
-          if (existingItemIndex !== -1) {
-            const updatedItems = [...state.items];
-            updatedItems[existingItemIndex].quantity += quantity;
-            return { items: updatedItems };
-          } else {
-            return {
-              items: [...state.items, { product, quantity, size }],
-            };
-          }
-        });
-      },
-
-      removeItem: (id, size) => {
-        set((state) => ({
-          items: state.items.filter(
-            (item) => !(item.product.id === id && item.size === size)
-          ),
-        }));
-      },
-
-      updateQuantity: (id, size, newQuantity) => {
-        set((state) => ({
-          items: state.items.map((item) =>
-            item.product.id === id && item.size === size
-              ? { ...item, quantity: newQuantity }
-              : item
-          ),
-        }));
-      },
-
-      clearCart: () => {
-        set({ items: [] });
       },
     }),
     {

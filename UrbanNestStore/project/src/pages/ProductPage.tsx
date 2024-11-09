@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Product } from '../types/Product';
 import heart from "../assets/heart.png";
+import filledheart from "../assets/filledheart.png";
 import Navbar from '../components/NavigationBar';
 import minus from "../assets/minus.png";
 import plus from "../assets/plus.png";
@@ -12,14 +13,25 @@ const ProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [count, setCount] = useState<number>(1);
-  const [selectedSize, setSelectedSize] = useState<number | null>(null); // Track selected size
+  const [selectedSize, setSelectedSize] = useState<number | null>(null);
+  const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
 
-  const { addItem } = useStore();
+  const { wishlist, addToWishlist, removeFromWishlist } = useStore();
+
+  // Handle heart icon click to add or remove from wishlist
+  const handleFavoriteToggle = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    if (isFavorite) {
+      removeFromWishlist(product?.id || 0);
+    } else {
+      addToWishlist(product!);
+    }
+    setIsFavorite(!isFavorite);
+  };
 
   const handleAddToCart = () => {
     if (product && selectedSize !== null) {
-      addItem(product, count, selectedSize);
       navigate("/cart");
     } else {
       alert("Please select a size before adding to cart.");
@@ -35,12 +47,15 @@ const ProductPage: React.FC = () => {
         }
         const data: Product = await response.json();
         setProduct(data);
+
+        // Check if the product is already in the wishlist
+        setIsFavorite(wishlist.some((item) => item.id === data.id));
       } catch (error) {
         console.error(error);
       }
     };
     fetchProduct();
-  }, [id]);
+  }, [id, wishlist]); // Re-fetch if wishlist changes
 
   if (!product) {
     return <div>Loading...</div>;
@@ -59,7 +74,12 @@ const ProductPage: React.FC = () => {
           <p className="text-xl font-semibold mt-2 mb-4">Price: ${product.price}</p>
           <p className="text-base mb-4 flex items-start">
             <span className='text-xl font-medium'>Description: <span className='text-sm '>{product.description}</span></span>
-            <img src={heart} alt="Favorite" className="ml-2 h-6 w-6" />
+            <img 
+              src={isFavorite ? filledheart : heart} 
+              alt="Favorite" 
+              className="ml-2 h-6 w-6 cursor-pointer" 
+              onClick={handleFavoriteToggle} 
+            />
           </p>
 
           <div className="flex items-center gap-2 my-4">

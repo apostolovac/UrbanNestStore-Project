@@ -6,10 +6,8 @@ import prev from "../assets/prev.png";
 import next from "../assets/next.png";
 
 const ImageSlider: React.FC = () => {
-  // Define the type for the images array
   const images: string[] = [slider, slider1, slider2];
 
-  // State to track the current image index
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   // Function to go to the previous image

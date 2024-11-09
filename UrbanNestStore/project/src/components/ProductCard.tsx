@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState, MouseEvent } from 'react';
 import { Product } from '../types/Product';
 import { AiFillStar } from 'react-icons/ai';
-import heart from "../assets/heart.png"
+import heart from "../assets/heart.png";
+import filledheart from "../assets/filledheart.png";
+import { useStore } from "../store/useStore";
 import { useNavigate } from 'react-router-dom';
 
 interface ProductCardProps {
@@ -10,16 +12,31 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const navigate = useNavigate();
+  const { wishlist, addToWishlist, removeFromWishlist } = useStore();
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   const handleClick = () => {
     navigate(`/product/${product.id}`);
   };
 
+  const handleFavoriteToggle = (event: MouseEvent<HTMLImageElement>) => {
+    event.stopPropagation();
+    if (isFavorite) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
+    }
+    setIsFavorite(!isFavorite);
+  };
+
+  useEffect(() => {
+    setIsFavorite(wishlist.some((item) => item.id === product.id));
+  }, [wishlist, product.id]);
+
   return (
-    <div 
-      onClick={handleClick} 
-      className="w-[275px] h-[500px] min-w-[260px] shadow flex flex-col rounded mb-20 cursor-pointer"
-    >
+    <div
+      onClick={handleClick}
+      className="w-[275px] h-[500px] min-w-[260px] shadow flex flex-col rounded mb-20 cursor-pointer">
       <img
         src={product.image}
         alt={product.title}
@@ -28,7 +45,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div className="flex flex-col justify-between h-[154px] w-[270px] p-5">
         <div className="flex justify-between items-start mb-2">
           <h2 className="font-medium text-sm flex flex-row">{product.title}</h2>
-          <img src={heart} alt="Favorite" className="h-6 w-6" />
+          <img
+            src={isFavorite ? filledheart : heart}
+            alt="Favorite"
+            className="h-6 w-6 cursor-pointer"
+            onClick={handleFavoriteToggle}
+          />
         </div>
         <div className="flex flex-col justify-items-start mt-auto">
           <p className="font-normal text-xs mb-2">{`Price: $${product.price}`}</p>
@@ -46,6 +68,5 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     </div>
   );
 };
-
 
 export default ProductCard;
