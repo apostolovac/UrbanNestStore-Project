@@ -4,18 +4,25 @@ import {useStore} from "../store/useStore";
 import view from "../assets/view.png"
 
 
-const SignUp: React.FC = () => {
+const SignUp = () => {
   const [userName, setUserName] = useState<string>("")
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [checked, setChecked] = useState<boolean>(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
+  // From the Zustand store to handle the sign-up process
   const register = useStore((state) => state.register);
 
   const navigate = useNavigate();
 
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  // Function to handle checkbox
   const handleChange = () => {
     setChecked(!checked);
   };
@@ -60,24 +67,23 @@ const SignUp: React.FC = () => {
       
       <div className="flex justify-between border-b-2 text-color-gray">
       <input
-        type="password"
+        type={isPasswordVisible ? "text" : "password"}
         placeholder="Password"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
         required
         
       />
-      <div className="cursor-pointer">
+      <div className="cursor-pointer" onClick={togglePasswordVisibility}>
         <img src={view} alt="eye" />
-        </div>
+      </div>
       </div>
       <label className="checkbox-inline text-color-gray">
         <input type="checkbox" checked={checked}
           onChange={handleChange}/> I agree with <b className="text-color-black">Privacy Policy</b> and <b className="text-color-black">Terms of Use</b></label>
       <button
         type="submit"
-        className="h-12 rounded-lg text-color-white bg-color-blue"
-      >
+        className="h-12 rounded-lg text-color-white bg-color-blue">
         {loading ? "Signing up..." : "Sign Up"}
       </button>
     </form>

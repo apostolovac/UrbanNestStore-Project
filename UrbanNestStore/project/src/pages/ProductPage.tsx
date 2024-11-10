@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Product } from '../types/Product';
 import heart from "../assets/heart.png";
@@ -9,7 +9,7 @@ import plus from "../assets/plus.png";
 import cardwithplus from "../assets/cardwithplus.png";
 import { useStore } from '../store/useStore';
 
-const ProductPage: React.FC = () => {
+const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [count, setCount] = useState<number>(1);
@@ -18,10 +18,10 @@ const ProductPage: React.FC = () => {
   const navigate = useNavigate();
 
   const { wishlist, addToWishlist, removeFromWishlist } = useStore();
+  const { addItem } = useStore();
 
   // Handle heart icon click to add or remove from wishlist
-  const handleFavoriteToggle = (event: React.MouseEvent) => {
-    event.stopPropagation();
+  const handleFavoriteToggle = () => {
     if (isFavorite) {
       removeFromWishlist(product?.id || 0);
     } else {
@@ -32,6 +32,7 @@ const ProductPage: React.FC = () => {
 
   const handleAddToCart = () => {
     if (product && selectedSize !== null) {
+      addItem(product, count, selectedSize);
       navigate("/cart");
     } else {
       alert("Please select a size before adding to cart.");

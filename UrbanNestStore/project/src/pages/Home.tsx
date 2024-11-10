@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Navbar from "../components/NavigationBar";
 import ImageSlider from "../components/SliderSection";
@@ -12,7 +12,7 @@ import Footer from "../components/Footer";
 import NewsletterSection from "../components/Subscribe";
 import ServiceSection from "../components/ServiceSection";
 
-const Home: React.FC = () => {
+const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Home: React.FC = () => {
       <Navbar />
       <ImageSlider />
       <BannerGrid />
-      <ProductSection products={products.slice(0, 4)} />
+      <ProductSection products={products.slice(0, 4)} />  {/*This will display only the first four products. */} 
       <ServiceSection />
       <section className="mt-12 hidden md:block">
         <div className="flex max-w-[1440px] h-[500px] mx-auto">

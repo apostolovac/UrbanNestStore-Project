@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useStore } from "../store/useStore";
 
 interface ProtectedRouteProps {
-  element: ReactNode;
+  element: ReactNode; // React library and is used to define the type for anything that can be rendered by React
 }
 
 const ProtectedRoute = ({ element }: ProtectedRouteProps) => {

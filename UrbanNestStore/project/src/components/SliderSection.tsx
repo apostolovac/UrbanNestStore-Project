@@ -5,20 +5,20 @@ import slider2 from "../assets/slider2.jpg";
 import prev from "../assets/prev.png";
 import next from "../assets/next.png";
 
-const ImageSlider: React.FC = () => {
+const ImageSlider = () => {
   const images: string[] = [slider, slider1, slider2];
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   // Function to go to the previous image
-  const prevSlide = (): void => {
+  const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
 
   // Function to go to the next image
-  const nextSlide = (): void => {
+  const nextSlide = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
@@ -48,7 +48,8 @@ const ImageSlider: React.FC = () => {
         </button>
 
         <div className="absolute bottom-2 md:bottom-4 left-0 right-0 flex justify-center">
-          {images.map((_, index) => (
+          {/* _ is used as a placeholder for the current element*/}
+          {images.map((_, index) => ( 
             <div
               key={index}
               className={`mx-1 ${

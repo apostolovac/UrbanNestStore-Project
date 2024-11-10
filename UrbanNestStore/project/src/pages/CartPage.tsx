@@ -1,4 +1,3 @@
-import React from 'react';
 import { useStore } from '../store/useStore';
 import trash from "../assets/trash.png";
 import minus from "../assets/minus.png";
@@ -11,12 +10,14 @@ import mastercard from "../assets/mastercard.png"
 import paypal from "../assets/paypal.png"
 import { useNavigate } from 'react-router-dom';
 
-const Cart: React.FC = () => {
+const Cart = () => {
   const { items, removeItem, updateQuantity } = useStore();
   const navigate = useNavigate();
 
-  const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
-  const totalPrice = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+  // Calculate the total quantity
+  const totalQuantity = items.reduce((accumulator, item) => accumulator + item.quantity, 0);
+  // Calculate the total Price
+  const totalPrice = items.reduce((accumulator, item) => accumulator + item.product.price * item.quantity, 0);
 
   const handleIncreaseQuantity = (id: number, size: number, currentQuantity: number) => {
     updateQuantity(id, size, currentQuantity + 1);

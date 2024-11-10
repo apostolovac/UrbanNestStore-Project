@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
 interface PublicRouteProps {
-  element: ReactNode;
+  element: ReactNode; // React library and is used to define the type for anything that can be rendered by React
 }
 
 const PublicRoute = ({ element }: PublicRouteProps) => {

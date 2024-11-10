@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useStore } from '../store/useStore';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '../components/ProgressBar';
@@ -9,12 +9,13 @@ import minus from "../assets/minus.png"
 import plus from "../assets/plus.png"
 import trash from "../assets/trash.png"
 
-const Checkout: React.FC = () => {
+const Checkout = () => {
   const { items } = useStore();
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal' | null>(null);
   const navigate = useNavigate();
 
-  const totalPrice = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+  // Calculate the Total Price
+  const totalPrice = items.reduce((accumulator, item) => accumulator + item.product.price * item.quantity, 0);
 
   const handlePlaceOrder = () => {
     navigate('/ordercomplete');

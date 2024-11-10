@@ -1,10 +1,9 @@
-import React from 'react';
 import { useStore } from '../store/useStore';
 import ProductCard  from '../components/ProductCard';
 import Navbar from '../components/NavigationBar';
 import Footer from '../components/Footer';
 
-const WishlistPage: React.FC = () => {
+const WishlistPage = () => {
   const { wishlist } = useStore();
 
   return (

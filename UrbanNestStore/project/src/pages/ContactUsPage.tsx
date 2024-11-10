@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import slider from "../assets/slider.png";
 import adress from "../assets/adress.png";
 import call from "../assets/call.png";
@@ -10,14 +10,14 @@ import Footer from "../components/Footer";
 import ServiceSection from "../components/ServiceSection";
 import { useStore } from "../store/useStore";
 
-const ContactUs: React.FC = () => {
+const ContactUs = () => {
   const { saveContactForm } = useStore();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
     saveContactForm(name, email, message);
     // Reset the form fields
     setName("");
@@ -86,7 +86,7 @@ const ContactUs: React.FC = () => {
               type="text"
               id="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(event) => setName(event.target.value)}
               placeholder="Your Name"
               className="border rounded-md p-2"
             />
@@ -98,7 +98,7 @@ const ContactUs: React.FC = () => {
               type="email"
               id="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(event) => setEmail(event.target.value)}
               placeholder="Your Email"
               className="border rounded-md p-2"
             />
@@ -109,7 +109,7 @@ const ContactUs: React.FC = () => {
             <textarea
               id="message"
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={(event) => setMessage(event.target.value)}
               placeholder="Your Message"
               className="border rounded-md p-2"
               rows={4}

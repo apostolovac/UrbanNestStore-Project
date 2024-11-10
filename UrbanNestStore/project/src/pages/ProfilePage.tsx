@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Navbar from '../components/NavigationBar';
 import Footer from '../components/Footer';
 import avatar from "../assets/avatar.png";
 import { useStore } from '../store/useStore';
 import { Link, useNavigate } from 'react-router-dom';
 
-const Profile: React.FC = () => {
+const Profile = () => {
   const { resetPassword } = useStore();
   const Signout = useStore((state) => state.Signout);
 
@@ -77,7 +77,7 @@ const Profile: React.FC = () => {
                 <input
                   type="text"
                   value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  onChange={(event) => setFirstName(event.target.value)}
                   placeholder="First name"
                   className="w-full mt-2 border border-color-lightgray p-2 rounded"
                 />
@@ -87,7 +87,7 @@ const Profile: React.FC = () => {
                 <input
                   type="text"
                   value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  onChange={(event) => setLastName(event.target.value)}
                   placeholder="Last name"
                   className="w-full mt-2 border border-color-lightgray p-2 rounded"
                 />
@@ -97,7 +97,7 @@ const Profile: React.FC = () => {
                 <input
                   type="tel"
                   value={displayName}
-                  onChange={(e) => setDisplayName(e.target.value)}
+                  onChange={(event) => setDisplayName(event.target.value)}
                   placeholder="Display name"
                   className="w-full border border-color-lightgray p-2 mt-2 rounded"
                 />
@@ -110,7 +110,7 @@ const Profile: React.FC = () => {
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(event) => setEmail(event.target.value)}
                   placeholder="Email"
                   className="w-full border border-color-lightgray p-2 mt-2 rounded"
                 />
@@ -124,7 +124,7 @@ const Profile: React.FC = () => {
                 <input
                   type="text"
                   value={oldPassword}
-                  onChange={(e) => setOldPassword(e.target.value)}
+                  onChange={(event) => setOldPassword(event.target.value)}
                   placeholder="Old password"
                   className="w-full mt-2 border border-color-lightgray p-2 rounded"
                 />
@@ -134,7 +134,7 @@ const Profile: React.FC = () => {
                 <input
                   type="password"
                   value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
+                  onChange={(event) => setNewPassword(event.target.value)}
                   placeholder="New password"
                   className="w-full mt-2 border border-color-lightgray p-2 rounded"
                 />
@@ -144,7 +144,7 @@ const Profile: React.FC = () => {
                 <input
                   type="password"
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(event) => setConfirmPassword(event.target.value)}
                   placeholder="Repeat new password"
                   className="w-full mt-2 border border-color-lightgray p-2 rounded"
                 />

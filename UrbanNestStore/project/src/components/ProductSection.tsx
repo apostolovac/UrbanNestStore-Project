@@ -1,4 +1,3 @@
-import React from 'react';
 import ProductCard from './ProductCard';
 import { Product } from '../types/Product';
 import shoparrow from "../assets/shoparrow.png"
@@ -8,7 +7,7 @@ interface ProductSectionProps {
   products: Product[];
 }
 
-const ProductSection: React.FC<ProductSectionProps> = ({ products }) => {
+const ProductSection = ({ products }: ProductSectionProps) => {
 
   return (
     <div className="max-w-[1120px] mx-auto mt-12">

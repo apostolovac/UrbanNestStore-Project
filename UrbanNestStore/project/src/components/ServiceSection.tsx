@@ -1,10 +1,9 @@
-import React from 'react';
 import delivery from '../assets/delivery.png';
 import payment from '../assets/payment.png';
 import lock from '../assets/lock.png';
 import call from '../assets/call.png';
 
-const ServiceSection: React.FC = () => {
+const ServiceSection = () => {
   return (
     <section className="max-w-[1120px] mx-auto grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <div className="w-[152px] h-[202px] lg:w-[262px] lg:h-[220px] py-12 px-2 lg:px-8 flex flex-col items-start bg-color-grayish">

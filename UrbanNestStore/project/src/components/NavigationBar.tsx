@@ -8,18 +8,21 @@ import shoppingbag from "../assets/shoppingbag.png";
 import user from "../assets/user.png";
 import heart from "../assets/heart.png";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const location = useLocation();
   
   const { items } = useStore();
   
-  const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
+  // Calculate the total quantity of items in the cart
+  const totalQuantity = items.reduce((accumulator, item) => accumulator + item.quantity, 0);
 
-  const toggleMenu = (): void => {
+  //A function that toggles the isOpen state 
+  const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  // Function to check if the current route is active
   const isActiveLink = (path: string) => {
     const currentPath = location.pathname.replace(/%20/g, ' ');
     return currentPath === path;

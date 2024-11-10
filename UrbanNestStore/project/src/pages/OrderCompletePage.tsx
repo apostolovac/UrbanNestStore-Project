@@ -1,13 +1,12 @@
-import React from 'react';
 import ProgressBar from '../components/ProgressBar';
 import Navbar from '../components/NavigationBar';
 import Footer from '../components/Footer';
 import thankyou from "../assets/thankyou.png";
 import { useStore } from '../store/useStore';
 
-const OrderComplete: React.FC = () => {
+const OrderComplete = () => {
   const { items } = useStore();
-  const totalPrice = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+  const totalPrice = items.reduce((accumulator, item) => accumulator + item.product.price * item.quantity, 0);
   
   return (
     <>

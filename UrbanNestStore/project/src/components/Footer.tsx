@@ -1,11 +1,10 @@
-import React from 'react';
 import instagram from '../assets/instagram.png';
 import facebook from '../assets/facebook.png';
 import youtube from '../assets/youtube.png';
 import logo from "../assets/logo.png"
 import logosm from "../assets/logosm.png"
 
-const Footer: React.FC = () => {
+const Footer = () => {
     return (
         <footer className="max-w-[1440px] h-auto mx-auto px-8 py-12 lg:p-[80px_160px_32px_160px] bg-color-black">
           <div className="flex flex-col items-center gap-5">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEvent } from 'react';
+import { useEffect, useState } from 'react';
 import { Product } from '../types/Product';
 import { AiFillStar } from 'react-icons/ai';
 import heart from "../assets/heart.png";
@@ -10,17 +10,19 @@ interface ProductCardProps {
   product: Product;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const navigate = useNavigate();
+const ProductCard = ({ product }: ProductCardProps) => {
+
   const { wishlist, addToWishlist, removeFromWishlist } = useStore();
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+
+  //  Navigates to product page
   const handleClick = () => {
     navigate(`/product/${product.id}`);
   };
 
-  const handleFavoriteToggle = (event: MouseEvent<HTMLImageElement>) => {
-    event.stopPropagation();
+  const handleFavoriteToggle = () => {
     if (isFavorite) {
       removeFromWishlist(product.id);
     } else {
@@ -34,12 +36,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   }, [wishlist, product.id]);
 
   return (
-    <div
-      onClick={handleClick}
-      className="w-[275px] h-[500px] min-w-[260px] shadow flex flex-col rounded mb-20 cursor-pointer">
+    <div className="w-[275px] h-[500px] min-w-[260px] shadow flex flex-col rounded mb-20 cursor-pointer">
       <img
         src={product.image}
         alt={product.title}
+        onClick={handleClick}
         className="h-[326px] w-[290px] object-contain rounded-t-lg"
       />
       <div className="flex flex-col justify-between h-[154px] w-[270px] p-5">
@@ -55,10 +56,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="flex flex-col justify-items-start mt-auto">
           <p className="font-normal text-xs mb-2">{`Price: $${product.price}`}</p>
           <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
+            {[...Array(5)].map((_, index) => (
               <AiFillStar
-                key={i}
-                className={`h-5 w-5 ${i < Math.round(product.rating.rate) ? 'text-yellow-500' : 'text-gray-300'}`}
+                key={index}
+                className={`h-5 w-5 ${index < Math.round(product.rating.rate) ? 'text-yellow-500' : 'text-gray-300'}`}
               />
             ))}
             <span className="font-normal text-xs text-color-gray pl-2.5">({product.rating.count})</span>

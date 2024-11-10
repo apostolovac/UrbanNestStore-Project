@@ -1,4 +1,3 @@
-import React from 'react';
 import checked from "../assets/checked.png";
 import one from "../assets/one.png";
 import two from "../assets/two.png";
@@ -9,7 +8,7 @@ interface ProgressBarProps {
   currentStep: number;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ currentStep }) => {
+const ProgressBar = ({ currentStep }: ProgressBarProps) => {
   return (
     <div className="flex flex-col lg:flex-row lg:justify-around lg:items-center mb-8">
   

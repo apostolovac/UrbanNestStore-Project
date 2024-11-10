@@ -10,10 +10,15 @@ const Signin = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [checked, setChecked] = useState<boolean>(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
+  // Access the Signin function from Zustand store
   const Signin = useStore((state) => state.Signin);
   const navigate = useNavigate();
 
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
   const handleChange = () => {
     setChecked(!checked);
   };
@@ -52,16 +57,16 @@ const Signin = () => {
       />
       <div className="flex justify-between border-b-2">
       <input
-        type="password"
+        type={isPasswordVisible ? "text" : "password"}
         placeholder="Password"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
         required
         
       />
-      <div className="cursor-pointer">
+      <div className="cursor-pointer" onClick={togglePasswordVisibility}>
         <img src={view} alt="eye" />
-        </div>
+      </div>
       </div>
       <div className="flex justify-between">
       <label className="checkbox-inline text-color-gray ">

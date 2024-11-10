@@ -3,14 +3,14 @@ import Signin from "./Signin";
 import SignUp from "./Signup";
 import heatherford from "../assets/heatherford.png"
 
-const Authentication = (): JSX.Element => {
+const Authentication = () => {
   const [isSignUp, setIsSignUp] = useState<boolean>(true);
 
   return (
     <div className="flex ">
-    <div>
+     <div>
       <img src={heatherford} alt="Image of Clothing"  />
-    </div>
+     </div>
       <div className=" mt-32 w-2/4 flex justify-center ">
       
         <div className="w-96">

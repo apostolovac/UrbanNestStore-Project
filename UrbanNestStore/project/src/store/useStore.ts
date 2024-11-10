@@ -15,16 +15,16 @@ interface CartItem {
 }
 
 interface State {
-  user: User | null;
-  users: User[];
-  isLoggedIn: boolean;
+  user: User | null; // Stores the currently logged-in user
+  users: User[]; // Stores the list of all registered users
+  isLoggedIn: boolean; // To track if a user is logged in
   loading: boolean;
   error: string | null;
-  contactFormData: ContactForm | null;
-  subscriptionEmail: string | null;
+  contactFormData: ContactForm | null; //  Stores form data for the contact form
+  subscriptionEmail: string | null; // Stores the email entered for newsletter subscription
 
   // Cart related state and methods
-  items: CartItem[];
+  items: CartItem[]; // To store items added to the cart
   addItem: (product: Product, quantity: number, size: number) => void;
   removeItem: (id: number, size: number) => void;
   updateQuantity: (id: number, size: number, newQuantity: number) => void;
@@ -63,13 +63,16 @@ export const useStore = create<State>()(
 
       // Cart related methods
       items: [],
+      // Add items to the shopping cart
       addItem: (product, quantity, size) => {
         set((state) => {
+          // check if the product exists in the cart
           const existingItemIndex = state.items.findIndex(
             (item) => item.product.id === product.id && item.size === size
           );
           if (existingItemIndex !== -1) {
             const updatedItems = [...state.items];
+            // Increase the quantity of the existing cart item
             updatedItems[existingItemIndex].quantity += quantity;
             return { items: updatedItems };
           } else {
@@ -82,6 +85,7 @@ export const useStore = create<State>()(
 
       removeItem: (id, size) => {
         set((state) => ({
+          // Updating the items array 
           items: state.items.filter(
             (item) => !(item.product.id === id && item.size === size)
           ),
@@ -180,8 +184,8 @@ export const useStore = create<State>()(
         const user = get().user;
         if (user) {
           set((state) => ({
-            users: state.users.map((u) =>
-              u.email === user.email ? { ...u, password: newPassword } : u
+            users: state.users.map((user) =>
+              user.email === user.email ? { ...user, password: newPassword } : user
             ),
             user: { ...user, password: newPassword },
           }));

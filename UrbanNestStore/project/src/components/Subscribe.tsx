@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useStore } from '../store/useStore';
 
-const Subscribe: React.FC = () => {
+const Subscribe = () => {
   const [email, setEmail] = useState<string>();
   const saveSubscriptionEmail = useStore((state) => state.saveSubscriptionEmail);
 
@@ -25,7 +25,7 @@ const Subscribe: React.FC = () => {
         <input
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
           placeholder="Your email address"
           className="border border-gray-300 rounded-l p-2 w-[320px] h-[45px] mr-4"
         />
