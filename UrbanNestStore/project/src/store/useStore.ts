@@ -70,7 +70,9 @@ export const useStore = create<State>()(
           const existingItemIndex = state.items.findIndex(
             (item) => item.product.id === product.id && item.size === size
           );
+          //findIndex returns -1 if it doesn’t find a matching item in the array
           if (existingItemIndex !== -1) {
+            // Copies the existing items in the cart to a new array
             const updatedItems = [...state.items];
             // Increase the quantity of the existing cart item
             updatedItems[existingItemIndex].quantity += quantity;
